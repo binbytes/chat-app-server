@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import session from 'express-session'
 import mongoose from 'mongoose'
 import socketEvents from './socketEvents'
+import cors from 'cors'
 
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
@@ -17,9 +18,8 @@ socketEvents(io)
 mongoose.connect(DB_URI)
 
 app.set('port', port)
-
 app.use(bodyParser.json())
-
+app.use(cors())
 app.use(session({
   secret: process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn',
   resave: false,
