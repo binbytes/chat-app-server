@@ -1,10 +1,12 @@
 import { Router } from 'express'
 import User from '../models/user'
+import jwt from 'jsonwebtoken'
 
 const router = Router()
+const secretKey = process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn'
 
 // Add POST - /api/register
-router.post('/register', (req, res, next) => {
+router.post('/auth/register', (req, res, next) => {
   // Check for registration errors
   const username = req.body.username
   const name = req.body.name
@@ -51,7 +53,7 @@ router.post('/register', (req, res, next) => {
 })
 
 // Add POST - /api/login
-router.post('/login', (req, res, next) => {
+router.post('/auth/login', (req, res, next) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     if (err) { return next(err) }
 
@@ -61,8 +63,7 @@ router.post('/login', (req, res, next) => {
         if (err) { return next(err) }
 
         if (isMatch) {
-          req.session.authUser = user
-          return res.json(user)
+          return res.json({ token: jwt.sign(user.toJSON(), secretKey) })
         } else {
           res.status(401).json({ message: 'Bad credentials' })
         }
@@ -74,7 +75,7 @@ router.post('/login', (req, res, next) => {
 })
 
 // Add POST - /api/logout
-router.post('/logout', (req, res) => {
+router.post('/auth/logout', (req, res) => {
   delete req.session.authUser
   res.json({ ok: true })
 })

@@ -5,7 +5,7 @@ const router = Router()
 
 /* GET users listing. */
 router.get('/users', function (req, res, next) {
-  User.find({ _id: { $ne: req.session.authUser.id } })
+  User.find({ _id: { $ne: req.authUser.id } })
     .then(users => {
       res.json(users)
     })
@@ -14,6 +14,11 @@ router.get('/users', function (req, res, next) {
       // Place error handler here
       res.status(500).send('Something went wrong')
     })
+})
+
+/* GET logged in user data */
+router.get('/me', function (req, res) {
+  return res.json(req.authUser)
 })
 
 /* GET user by ID. */

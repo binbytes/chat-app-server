@@ -1,7 +1,6 @@
 import express from 'express'
 import routes from './routes'
 import bodyParser from 'body-parser'
-import session from 'express-session'
 import mongoose from 'mongoose'
 import socketEvents from './socketEvents'
 import cors from 'cors'
@@ -12,23 +11,22 @@ const port = process.env.PORT || 3002
 const DB_URI = process.env.DB_URL || 'mongodb://localhost/nuxt-chat-app'
 const server = require('http').createServer(app)
 
-const io = require('socket.io').listen(server)
-socketEvents(io)
-
 mongoose.connect(DB_URI)
 
 app.set('port', port)
+
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
 app.use(cors({
   credentials: true,
   origin: 'http://localhost:3000' // Change allowed origin url for production, todo: load it from env
 }))
-app.use(session({
-  secret: process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60000 }
-}))
+
+const io = require('socket.io').listen(server)
+
+// Bind socket events
+socketEvents(io)
 
 // Import API Routes
 app.use('/api', routes)

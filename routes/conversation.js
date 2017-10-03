@@ -6,7 +6,7 @@ const router = Router()
 
 // Get conversations with recent message of authUser
 router.get('/conversations', function (req, res, next) {
-  Conversation.find({ participants: req.session.authUser.id })
+  Conversation.find({ participants: req.authUser.id })
     .select('_id, participants')
     .exec((err, conversations) => {
       if (err) {
@@ -39,7 +39,7 @@ router.post('/conversation', function (req, res, next) {
     return next()
   }
 
-  Conversation.findOne({ participants: [req.session.authUser.id, req.body.recipient] }, (err, existingConversation) => {
+  Conversation.findOne({ participants: [req.authUser.id, req.body.recipient] }, (err, existingConversation) => {
     if (err) { return next(err) }
 
     if (existingConversation) {
@@ -47,7 +47,7 @@ router.post('/conversation', function (req, res, next) {
     }
 
     const conversation = new Conversation({
-      participants: [req.session.authUser.id, req.body.recipient]
+      participants: [req.authUser.id, req.body.recipient]
     })
 
     conversation.save((err, newConversation) => {
@@ -60,7 +60,7 @@ router.post('/conversation', function (req, res, next) {
       const message = new Message({
         conversationId: newConversation._id,
         body: 'I am inviting you to start conversation with me', // later on we can set permission to accpet/declient chat invitation
-        author: req.session.authUser.id
+        author: req.authUser.id
       })
 
       message.save((err, newMessage) => {
@@ -86,7 +86,7 @@ router.post('/send-message/:conversationId', function (req, res, next) {
   const reply = new Message({
     conversationId: req.params.conversationId,
     body: newMessage,
-    author: req.session.authUser.id
+    author: req.authUser.id
   })
 
   reply.save((err, sentReply) => {
