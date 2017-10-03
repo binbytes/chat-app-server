@@ -1365,6 +1365,13 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
+dotenv-loader@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/dotenv-loader/-/dotenv-loader-1.2.1.tgz#53a11008d464c94420390576eaca0d0e6e314453"
+  dependencies:
+    last-callback "^1.0.2"
+    typer "^1.1.0"
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -2497,6 +2504,10 @@ kind-of@^4.0.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
+
+last-callback@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/last-callback/-/last-callback-1.0.3.tgz#bad826c18f1df06b0dda5849f8fd27f61aaf7cf4"
 
 latest-version@^3.0.0:
   version "3.1.0"
@@ -3999,6 +4010,10 @@ type-is@~1.6.15:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+typer@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/typer/-/typer-1.1.0.tgz#e8db09ba0934ecda4fd5d847fc260539c20048e5"
 
 uglify-js@^2.8.29:
   version "2.8.29"

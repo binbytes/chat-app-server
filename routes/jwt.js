@@ -2,7 +2,7 @@ import { Router } from 'express'
 import jwt from 'jsonwebtoken'
 
 const router = Router()
-const secretKey = process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn'
+const secretKey = process.env.SECRET_KEY || '7CigmgctzNfojD5D3eJ7tY62axBuFICn'
 
 router.use(function (req, res, next) {
   // check header or url parameters or post parameters for token

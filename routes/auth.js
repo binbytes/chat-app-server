@@ -3,7 +3,7 @@ import User from '../models/user'
 import jwt from 'jsonwebtoken'
 
 const router = Router()
-const secretKey = process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn'
+const secretKey = process.env.SECRET_KEY || '7CigmgctzNfojD5D3eJ7tY62axBuFICn'
 
 // Add POST - /api/register
 router.post('/auth/register', (req, res, next) => {
