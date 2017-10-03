@@ -19,7 +19,10 @@ mongoose.connect(DB_URI)
 
 app.set('port', port)
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000' // Change allowed origin url for production, todo: load it from env
+}))
 app.use(session({
   secret: process.env.secretKey || '7CigmgctzNfojD5D3eJ7tY62axBuFICn',
   resave: false,
