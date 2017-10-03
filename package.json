@@ -1,0 +1,30 @@
+{
+  "name": "chat-app-server",
+  "version": "1.0.0",
+  "description": "An back-end server for chat app",
+  "author": "Nikunj Kanetiya <kanetiya@gmail.com>",
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "express-session": "^1.15.6",
+    "mongoose": "^4.11.14",
+    "socket.io": "^2.0.3"
+  },
+  "scripts": {
+    "dev": "backpack dev",
+    "build": "backpack build",
+    "start": "NODE_ENV=production node build/main.js",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "backpack-core": "^0.4.2",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
