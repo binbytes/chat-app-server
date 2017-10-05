@@ -45,8 +45,6 @@ router.post('/auth/register', (req, res, next) => {
     user.save((err, user) => {
       if (err) { return next(err) }
 
-      req.session.authUser = user.toJSON()
-
       res.status(201).json(user)
     })
   })
