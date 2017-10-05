@@ -9,7 +9,7 @@ import env from 'dotenv-loader'
 env.load('.env')
 
 const app = express()
-const host = process.env.HOST || '127.0.0.1'
+const host = process.env.HOST || null
 const port = process.env.PORT || 3002
 const DB_URI = process.env.DB_URL
 const server = require('http').createServer(app)
@@ -36,4 +36,4 @@ app.use('/api', routes)
 
 // Listen the server
 server.listen(port, host)
-console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console
+console.log('Server listening on ' + (host == null ? host : 'localhost') + ':' + port) // eslint-disable-line no-console
