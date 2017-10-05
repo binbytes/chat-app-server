@@ -69,7 +69,7 @@ router.post('/conversation', function (req, res, next) {
           return next(err)
         }
 
-        return res.status(200).json({ conversationId: conversation._id })
+        return res.status(200).json(newConversation)
       })
     })
   })
