@@ -18,7 +18,7 @@ router.get('/users', function (req, res, next) {
 
 /* GET logged in user data */
 router.get('/me', function (req, res) {
-  return res.json(req.authUser)
+  res.status(200).json(req.authUser)
 })
 
 /* GET user by ID. */

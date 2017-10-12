@@ -5,7 +5,6 @@ export default function (io) {
 
   // Set socket.io listeners.
   io.on('connection', (socket) => {
-    console.log('a socket client connected')
 
     socket.on('disconnect', () => {
       let userId = userSockets[socket.id]
@@ -19,12 +18,15 @@ export default function (io) {
     })
 
     socket.on('online-ping', (userId) => {
+
       if (userId) {
         userSockets[socket.id] = userId
-        socket.emit('welcome', { 'test': 'welcome' })
         socket.broadcast.emit('user-online', userId)
 
-        console.log('asdas', Object.values(userSockets))
+        setTimeout(function () {
+          // Send currently online users
+          socket.emit('online-users', Object.values(userSockets))
+        }, 1000)
       }
     })
 
