@@ -43,35 +43,41 @@ router.post('/conversation', function (req, res, next) {
     if (err) { return next(err) }
 
     if (existingConversation) {
-      return res.status(200).json(existingConversation)
-    }
-
-    const conversation = new Conversation({
-      participants: [req.authUser.id, req.body.recipient]
-    })
-
-    conversation.save((err, newConversation) => {
-      if (err) {
-        res.send({ error: err })
-        return next(err)
-      }
-
-      // Default Welcome message
-      const message = new Message({
-        conversationId: newConversation._id,
-        body: 'I am inviting you to start conversation with me', // later on we can set permission to accpet/declient chat invitation
-        author: req.authUser.id
+      Message.find({ conversationId: existingConversation._id })
+        .select('createdAt body author')
+        .then(messages => {
+          const data = existingConversation.toJSON();
+          data.messages = messages
+          return res.status(200).json(data)
+        })
+    } else {
+      const conversation = new Conversation({
+        participants: [req.authUser.id, req.body.recipient]
       })
 
-      message.save((err, newMessage) => {
+      conversation.save((err, newConversation) => {
         if (err) {
           res.send({ error: err })
           return next(err)
         }
 
-        return res.status(200).json(newConversation)
+        // Default Welcome message
+        const message = new Message({
+          conversationId: newConversation._id,
+          body: 'I am inviting you to start conversation with me', // later on we can set permission to accpet/declient chat invitation
+          author: req.authUser.id
+        })
+
+        message.save((err, newMessage) => {
+          if (err) {
+            res.send({ error: err })
+            return next(err)
+          }
+
+          return res.status(200).json(newConversation)
+        })
       })
-    })
+    }
   })
 })
 
