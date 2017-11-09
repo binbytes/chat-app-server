@@ -6,7 +6,7 @@ const router = Router()
 
 // Get conversations with recent message of authUser
 router.get('/conversations', function (req, res, next) {
-  Conversation.find({ participants: req.authUser.id })
+  Conversation.find({ participants: { $in: [req.authUser.id] } })
     .select('_id, participants')
     .exec((err, conversations) => {
       if (err) {
@@ -39,11 +39,11 @@ router.post('/conversation', function (req, res, next) {
     return next()
   }
 
-  Conversation.findOne({ participants: [req.authUser.id, req.body.recipient] }, (err, existingConversation) => {
+  Conversation.findOne({ participants: { $all: [req.authUser.id, req.body.recipient] } }, (err, existingConversation) => {
     if (err) { return next(err) }
 
     if (existingConversation) {
-      return res.status(200).json({ conversationId: existingConversation._id })
+      return res.status(200).json(existingConversation)
     }
 
     const conversation = new Conversation({

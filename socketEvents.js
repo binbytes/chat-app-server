@@ -1,16 +1,12 @@
 export default function (io) {
-
   // Currently lets just keep records of user id & their socket id
   let userSockets = {}
 
   // Set socket.io listeners.
   io.on('connection', (socket) => {
-
     socket.on('disconnect', () => {
       let userId = userSockets[socket.id]
       delete userSockets[socket.id]
-
-      console.log('disconnect', userId, userSockets)
 
       if (userId) {
         io.sockets.emit('user-offline', userId)
@@ -18,7 +14,6 @@ export default function (io) {
     })
 
     socket.on('online-ping', (userId) => {
-
       if (userId) {
         userSockets[socket.id] = userId
         socket.broadcast.emit('user-online', userId)
