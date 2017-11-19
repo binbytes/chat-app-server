@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import jwt from 'jsonwebtoken'
+import constants from '../config/constants'
 
 const router = Router()
-const secretKey = process.env.SECRET_KEY || '7CigmgctzNfojD5D3eJ7tY62axBuFICn'
 
 router.use(function (req, res, next) {
   // check header or url parameters or post parameters for token
@@ -11,7 +11,7 @@ router.use(function (req, res, next) {
   // decode token
   if (token) {
     // verifies secret and checks exp
-    jwt.verify(token, secretKey, function (err, authUser) {
+    jwt.verify(token, constants.SECRET_KEY, function (err, authUser) {
       if (err) {
         return res.status(401).json({ success: false, message: 'Failed to authenticate token.' })
       } else {

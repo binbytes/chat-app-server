@@ -1,37 +1,21 @@
 import { Router } from 'express'
-import User from '../models/user'
+import userCtrl from '../controllers/user'
 
 const router = Router()
 
-/* GET users listing. */
-router.get('/users', function (req, res, next) {
-  User.find({ _id: { $ne: req.authUser.id } })
-    .then(users => {
-      res.json(users)
-    })
-    .catch(error => {
-      if (error) { return next(error) }
-      // Place error handler here
-      res.status(500).send('Something went wrong')
-    })
-})
+router.route('/me')
+  /** GET /api/users - Get logged in user data */
+  .get(userCtrl.me)
 
-/* GET logged in user data */
-router.get('/me', function (req, res) {
-  res.status(200).json(req.authUser)
-})
+router.route('/users')
+  /** GET /api/users - Get list of users */
+  .get(userCtrl.list)
 
-/* GET user by ID. */
-router.get('/users/:id', function (req, res, next) {
-  User.find({ _id: req.query.id })
-    .then(user => {
-      res.json(user)
-    })
-    .catch(error => {
-      if (error) { return next(error) }
-      // Place error handler here
-      res.status(500).send('Something went wrong')
-    })
-})
+router.route('/users/:userId')
+  /** GET /api/users/:userId - Get single user */
+  .get(userCtrl.get)
+
+/** Load user when API with userId route parameter is hit */
+router.param('userId', userCtrl.load)
 
 export default router
