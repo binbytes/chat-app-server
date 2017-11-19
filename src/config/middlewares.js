@@ -8,7 +8,6 @@ import passport from 'passport'
 import expressWinston from 'express-winston'
 import methodOverride from 'method-override'
 import cors from 'cors'
-import expressStatusMonitor from 'express-status-monitor'
 
 import winstonInstance from './winston'
 
@@ -24,8 +23,6 @@ export default app => {
     credentials: true,
     origin: process.env.FRONT_ORIGIN // Change allowed origin url for production
   }))
-  // Disbled it for now
-  // app.use(expressStatusMonitor())
   app.use(methodOverride())
   if (isDev && !isTest) {
     app.use(morgan('dev'))
