@@ -62,8 +62,7 @@ UserSchema.methods.toJSON = function () {
   return {
     id: this._id,
     username: this.username,
-    name: this.name,
-    avatar: 'http://lorempixel.com/55/55/people/' + Math.floor((Math.random() * 10) + 1) // random avatar till we don't have avatar
+    name: this.name
   }
 }
 
