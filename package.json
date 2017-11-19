@@ -1,25 +1,38 @@
 {
   "name": "chat-app-server",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "An back-end server for chat app",
   "author": "Nikunj Kanetiya <kanetiya@gmail.com>",
-  "dependencies": {
-    "bcrypt-nodejs": "^0.0.3",
-    "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
-    "dotenv-loader": "^1.2.1",
-    "express": "^4.16.1",
-    "express-session": "^1.15.6",
-    "jsonwebtoken": "^8.0.1",
-    "mongoose": "^4.11.14",
-    "socket.io": "^2.0.3"
-  },
   "scripts": {
     "dev": "backpack dev",
     "build": "backpack build",
     "start": "NODE_ENV=production node build/main.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cors": "^2.8.4",
+    "dotenv-loader": "^1.2.1",
+    "express": "^4.16.1",
+    "express-session": "^1.15.6",
+    "express-status-monitor": "^1.0.1",
+    "express-validation": "^1.0.2",
+    "express-winston": "^2.4.0",
+    "http-status": "^1.0.1",
+    "jsonwebtoken": "^8.0.1",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.11.14",
+    "mongoose-unique-validator": "^1.0.6",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "pretty-error": "^2.1.1",
+    "raven": "^2.2.1",
+    "socket.io": "^2.0.3",
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -28,6 +41,7 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-promise": "^3.4.1",
-    "eslint-plugin-standard": "^2.0.1"
+    "eslint-plugin-standard": "^2.0.1",
+    "morgan": "^1.9.0"
   }
 }
