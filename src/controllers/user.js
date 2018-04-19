@@ -33,7 +33,7 @@ function list (req, res, next) {
  * @returns {User[]}
  */
 function me (req, res, next) {
-  res.status(200).json(req.authUser)
+  res.status(200).json({ user: req.authUser })
 }
 
 /**

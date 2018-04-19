@@ -61,7 +61,7 @@ function login (req, res, next) {
  * Logout
  */
 function logout (req, res, next) {
-  delete req.session.authUser
+  // delete req.session.authUser
   res.json({ ok: true })
 }
 

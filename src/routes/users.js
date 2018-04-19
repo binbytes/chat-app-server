@@ -3,7 +3,7 @@ import userCtrl from '../controllers/user'
 
 const router = Router()
 
-router.route('/me')
+router.route('/users/me')
   /** GET /api/users - Get logged in user data */
   .get(userCtrl.me)
 
