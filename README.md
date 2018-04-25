@@ -8,7 +8,6 @@
 1. cd chat-app-server
 2. cp .env.example .env (setup the environment variables, dont forget set SECRET_KEY)
 2. npm install (yarn)
-3. npm run dev
-For production
-4. npm run build
-5. npm run start
+3. npm run dev (For development)
+4. npm run build (Build for production)
+5. npm run start (Run/Start server for Production)
