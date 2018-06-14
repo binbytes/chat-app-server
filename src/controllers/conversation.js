@@ -23,7 +23,12 @@ function list (req, res, next) {
  * @returns {Conversation}
  */
 function get (req, res, id) {
-  Conversation.findOne({ _id: req.params.id })
+  Conversation.findOne({
+      _id: req.params.id,
+      participants: {
+        $in: [req.authUser.id]
+      }
+    })
     .then(conversation => {
       if (conversation) {
         Message.find({ conversationId: conversation._id })
